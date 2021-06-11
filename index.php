@@ -61,13 +61,13 @@ function divide($a, $b) {
     return $a / $b;
 };
 
-echo sum(8, 3);
+echo sum(8, 3); //11
 echo '<br>';
-echo differ(8, 3);
+echo differ(8, 3); //5
 echo '<br>';
-echo multipl(8, 3);
+echo multipl(8, 3); //24
 echo '<br>';
-echo divide(8, 3);
+echo divide(8, 3); //2,666
 echo '<br>';
 echo '<br>';
 
@@ -89,13 +89,13 @@ function mathOperation($arg1, $arg2, $operation) {
 };
 echo 'Функция mathOperation($arg1, $arg2, $operation);';
 echo '<br>';
-echo mathOperation(9, 3, 'sum');
+echo mathOperation(9, 3, 'sum'); //12
 echo '<br>';
-echo mathOperation(9, 3, 'differ');
+echo mathOperation(9, 3, 'differ'); //6
 echo '<br>';
-echo mathOperation(9, 3, 'multipl');
+echo mathOperation(9, 3, 'multipl'); //27
 echo '<br>';
-echo mathOperation(9, 3, 'divide');
+echo mathOperation(9, 3, 'divide'); //3
 echo '<br>';
 echo '<br>';
 
@@ -123,9 +123,15 @@ echo '<br>';
 echo '<br>';
 echo '<br>';
 function power($val, $pow) {
-    if ($pow = 0) return 1;
-    return ($val * power($val, $pow - 1));
+    if ($pow === 2) return $val*$val;
+    return ($val * power($val, ($pow - 1)));
 };
 
-echo power(2, 3);
+echo power(2, 3); // 8
+echo '<br>';
+echo power(2, 4); // 16
+echo '<br>';
+echo power(3, 3); // 27
+echo '<br>';
+echo '<br>';
 ?>
