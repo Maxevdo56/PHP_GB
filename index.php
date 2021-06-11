@@ -134,4 +134,19 @@ echo '<br>';
 echo power(3, 3); // 27
 echo '<br>';
 echo '<br>';
+
+/* *Написать функцию, которая вычисляет текущее время и возвращает его 
+в формате с правильными склонениями, например: 22 часа 15 минут, 21 час 43 минуты. */
+
+$settime = date('h:i');
+var_dump($settime);
+$hour = date('h', $settime);
+var_dump($hour);
+
+function showtime($settime) {
+    $hour = date('h', $settime);
+    return $hour;
+    //return `'Сейчас '.date()$settime('h').'часов '.$settime('i').'минут.'`;
+};
+var_dump(showtime($settime));
 ?>
