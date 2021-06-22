@@ -1,58 +1,84 @@
-<?php
-
-/* 1. Установить программное обеспечение: веб­-сервер, базу данных, 
-интерпретатор, текстовый редактор и проверить, что всё работает правильно. */
-// Установлен openserver + VS Code
-
-
-/* 2. Выполнить примеры из методички, разобраться, как это работает. */
-// Примеры разобраны, всё понятно.
-
-
-/* 3. Объяснить, как работает данный код:  */
-$a = 5;
-$b = '05';
-var_dump($a == $b);                         // Почему true?
-// Сравниваются только значения. Происходит неявное преобразование типов данных и 5 = 5
-var_dump((int)'012345');                    // Почему 12345?
-// Явное преобразование типа к integer, поэтому 12345
-var_dump((float)123.0 === (int)123.0);      // Почему false?
-// Сравнение не только значений, но и типов данных. Типы данных разные
-var_dump((int)0 === (int)'hello, world');   // Почему true?
-// Строка 'hello, world' преобразуется в число явным образом и становится 0
-?>
-
-<?php
-/* 4. Используя имеющийся HTML-шаблон, сделать так, чтобы главная страница 
-генерировалась через PHP. Создать блок переменных в начале страницы. Сделать так, чтобы 
-h1, title и текущий год генерировались в блоке контента из созданных переменных. */
-
-$title = 'Мой первый сайт на PHP';
-$h1 = 'Заголовок, созданный на PHP';
-$year = date('Y');
-?>
+<! --
+Задание 1. Создать галерею фотографий. Она должна состоять из одной страницы, 
+на которой пользователь видит все картинки в уменьшенном виде. 
+При клике на фотографию она должна открыться в браузере в новой вкладке. 
+Размер картинок можно ограничивать с помощью свойства width
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title?></title>
+    <link href="style.css" rel="stylesheet">
+    <title>Gallery</title>
 </head>
 <body>
-    <h1><?php echo $h1?></h1>
-    <div>Текущий год <?php echo $year?></div>
+    <h2>Задание 1 - Галлерея на HTML</h2>
+    <a href="./img/wolf.jpg" target="_blank"><img width="350px" src="./img/wolf.jpg" alt="wolf"></a>
+    <a href="./img/bear.jpg" target="_blank"><img width="350px" src="./img/bear.jpg" alt="bear"></a>
+    <a href="./img/fox.jpg" target="_blank"><img width="350px" src="./img/fox.jpg" alt="fox"></a>
+
+    <! --
+    Задание 2. *Строить фотогалерею, не указывая статичные ссылки к файлам, 
+    а просто передавая в функцию построения адрес папки с изображениями. 
+    Функция сама должна считать список файлов и построить фотогалерею со ссылками в ней.
+    -->
+    <?php
+        echo '<br>'.'<h2>Задание 2 - Галлерея на PHP</h2>'.'<br>';
+        $files = scandir('./img/');
+        foreach ($files as $file) {
+            if ($file == '.' || $file == '..') {
+                continue;
+            } else {
+                echo '<a href="./img/'.$file.'" target="_blank"><img width="350px" src="./img/'.$file.'"></a>';
+            };
+        };
+    ?>
+    
+    <! --
+    Задание 3. *[ для тех, кто изучал JS-1 ] 
+    При клике по миниатюре нужно показывать полноразмерное изображение в модальном окне
+    -->
+    <?php
+        echo '<br>'.'<h2>Задание 3 - Галлерея на PHP + модальное окно</h2>'.'<br>';
+        $files = scandir('./img/');
+        foreach ($files as $file) {
+            if ($file == '.' || $file == '..') {
+                continue;
+            } else {
+                echo '<div class="modal" id="modal-1">';
+                echo '<div class="modal__content">';
+                echo '<a class="modal5" href="./img/'.$file.'" target="_parent"><img width="350px" src="./img/'.$file.'"></a>';
+                echo '</div>';
+                echo '</div>';
+                
+            };
+        };
+    ?>
+
+
+    <header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+        <p>Smartlanding</p>
+        </div>
+        <button id="callback-button" class="header__button">Обратный звонок</button>
+    </div>
+    </header>
+    <!-- Модальное окно -->
+    <div class="modal" id="modal-1">
+    <div class="modal__content">
+        <button class="modal__close-button"><img src="./close.png" width="18" alt=""></button>
+        <?php 
+            echo '<img width="600px" src="./img/'.$file.'">';
+        ?>
+    </div>
+    </div>
+
+
+    </div>
+</div>
+<script src="./script.js"></script> 
 </body>
 </html>
-
-<?php
-/* 5. *Используя только две переменные, поменяйте их значение местами. 
-Например, если a = 1, b = 2, надо, чтобы получилось b = 1, a = 2. 
-Дополнительные переменные использовать нельзя.*/
-
-$a = 10;
-$b = 6;
-$a += $b; // $a = 16
-$b = $a - $b; // $b = 10
-$a = $a - $b; // $a = 6
-?>
