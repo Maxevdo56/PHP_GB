@@ -1,17 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let callBackButton = document.getElementsByClassName('modal-1');
-    let modal1 = document.getElementById('modal-1');
-    let closeButton = modal1.getElementsByClassName('modal__close-button')[0];
+
+  let clickImage = document.getElementsByClassName('click-image')[0];   // Миниатюра по которой происходит клик
+  let modalwindow = document.getElementById('modal-window');   // Модальное окно, которое нужно открыть
+  let closeButton = modalwindow.getElementsByClassName('modal-close-button')[0];   // Кнопка "закрыть"
   
-    callBackButton.onclick = function (e) {
-      e.preventDefault();
-      modal1.classList.add('modal_active');
-      tagBody.classList.add('hidden');
+  clickImage.onclick = () => modalwindow.classList.add('modal_active');
+  closeButton.onclick = () => modalwindow.classList.remove('modal_active');
+
+  // Вызов модального окна несколькими кнопками на странице
+  let clickImageButton = document.getElementsByClassName('get-modal_1');
+
+  for (let button of clickImageButton) {
+    button.onclick = () => modalwindow.classList.add('modal_active');
     }
-  
-    closeButton.onclick = function (e) {
-      e.preventDefault();
-      modal1.classList.remove('modal_active');
-      tagBody.classList.remove('hidden');
-    }
-    });
+});

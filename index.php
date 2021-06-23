@@ -47,38 +47,22 @@
             if ($file == '.' || $file == '..') {
                 continue;
             } else {
-                echo '<div class="modal" id="modal-1">';
-                echo '<div class="modal__content">';
-                echo '<a class="modal5" href="./img/'.$file.'" target="_parent"><img width="350px" src="./img/'.$file.'"></a>';
-                echo '</div>';
-                echo '</div>';
-                
+                echo '<a class="click-image get-modal_1" href="#">
+                    <img width="350px" src="./img/'.$file.'"></a>';
             };
         };
     ?>
 
-
-    <header class="header">
-    <div class="header__inner">
-        <div class="header__logo">
-        <p>Smartlanding</p>
-        </div>
-        <button id="callback-button" class="header__button">Обратный звонок</button>
-    </div>
-    </header>
-    <!-- Модальное окно -->
-    <div class="modal" id="modal-1">
+  <!-- Модальное окно -->
+  <div class="modal" id="modal-window">
     <div class="modal__content">
-        <button class="modal__close-button"><img src="./close.png" width="18" alt=""></button>
-        <?php 
-            echo '<img width="600px" src="./img/'.$file.'">';
-        ?>
+      <button class="modal-close-button"><img src="./close.png" width="12" alt=""></button>
+      <?php var_dump($file);?>
+      <img width="100%" src="./img/<?php echo $file ?>" alt="">
     </div>
-    </div>
+  </div>
 
+  <script src="./script.js"></script>
 
-    </div>
-</div>
-<script src="./script.js"></script> 
 </body>
 </html>
