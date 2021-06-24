@@ -1,58 +1,45 @@
-<?php
-
-/* 1. Установить программное обеспечение: веб­-сервер, базу данных, 
-интерпретатор, текстовый редактор и проверить, что всё работает правильно. */
-// Установлен openserver + VS Code
-
-
-/* 2. Выполнить примеры из методички, разобраться, как это работает. */
-// Примеры разобраны, всё понятно.
-
-
-/* 3. Объяснить, как работает данный код:  */
-$a = 5;
-$b = '05';
-var_dump($a == $b);                         // Почему true?
-// Сравниваются только значения. Происходит неявное преобразование типов данных и 5 = 5
-var_dump((int)'012345');                    // Почему 12345?
-// Явное преобразование типа к integer, поэтому 12345
-var_dump((float)123.0 === (int)123.0);      // Почему false?
-// Сравнение не только значений, но и типов данных. Типы данных разные
-var_dump((int)0 === (int)'hello, world');   // Почему true?
-// Строка 'hello, world' преобразуется в число явным образом и становится 0
-?>
-
-<?php
-/* 4. Используя имеющийся HTML-шаблон, сделать так, чтобы главная страница 
-генерировалась через PHP. Создать блок переменных в начале страницы. Сделать так, чтобы 
-h1, title и текущий год генерировались в блоке контента из созданных переменных. */
-
-$title = 'Мой первый сайт на PHP';
-$h1 = 'Заголовок, созданный на PHP';
-$year = date('Y');
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title?></title>
+    <title>Gallery</title>
 </head>
+<!--
+    CREATE TABLE images (  
+    id int NOT NULL primary key AUTO_INCREMENT comment 'primary key',
+    file_path varchar(255) comment 'path to file',
+    file_names varchar(255) comment 'name of file',
+    file_size INT comment 'filesize in bytes'
+    ) default charset utf8 comment '';
+-->
 <body>
-    <h1><?php echo $h1?></h1>
-    <div>Текущий год <?php echo $year?></div>
+<a href=""></a>
+<?php
+    echo '<h2>Галлерея фотографий сортируется по количеству просмотров</h2>';
+    $link = mysqli_connect('127.0.0.1', 'root', 'root', 'php_db', 3360);
+    $image_id = $_GET['id'];
+    if ($image_id != null) {
+        echo '<a href="/">На главную</a><br>';
+        $image_result = mysqli_query($link, "SELECT * FROM images WHERE id = $image_id;");
+        while ($row = mysqli_fetch_assoc($image_result)) 
+        {
+            $view_plus_one = (int)$row['viewed'] + 1;
+            mysqli_query($link, "UPDATE `php_db`.`images` SET `viewed` = '$view_plus_one' WHERE `id` = '$image_id';");
+            echo 'Количество просмотров этой фотографии: '.$view_plus_one.'<br>';
+            echo '<img src="'.$row["file_path"].$row["file_names"].'">';
+        }
+    } else {
+        $result = mysqli_query($link, "SELECT * FROM images ORDER BY viewed DESC;");
+        while($row = mysqli_fetch_assoc($result)) 
+        {
+            echo '<a href="/?id='.$row['id'].'"><img width="350px" src="'.$row['file_path'].$row['file_names'].'"></a>';
+            echo 'Просмотров: '.$row['viewed'].'<br>';
+        }
+    };
+    mysqli_close($link);
+?>
+    
 </body>
 </html>
-
-<?php
-/* 5. *Используя только две переменные, поменяйте их значение местами. 
-Например, если a = 1, b = 2, надо, чтобы получилось b = 1, a = 2. 
-Дополнительные переменные использовать нельзя.*/
-
-$a = 10;
-$b = 6;
-$a += $b; // $a = 16
-$b = $a - $b; // $b = 10
-$a = $a - $b; // $a = 6
-?>
