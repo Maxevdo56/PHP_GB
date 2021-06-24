@@ -7,13 +7,6 @@
     <title>Gallery</title>
 </head>
 <!--
-    1. Создать галерею изображений, состоящую из двух страниц:
-    просмотр всех фотографий (уменьшенных копий);
-    просмотр конкретной фотографии (изображение оригинального размера) по ее ID в базе данных.
-    2. В базе данных создать таблицу, в которой будет храниться информация о картинках 
-    (адрес на сервере, размер, имя).
--->
-<!--
     CREATE TABLE images (  
     id int NOT NULL primary key AUTO_INCREMENT comment 'primary key',
     file_path varchar(255) comment 'path to file',
@@ -22,20 +15,31 @@
     ) default charset utf8 comment '';
 -->
 <body>
+<a href=""></a>
 <?php
-    $link = mysqli_connect('127.0.0.1', 'root', '123456', 'php_db');
-    echo 'DB Connection.....OK!<br>';
-    $result = mysqli_query($link, "SELECT * FROM images");
-/*
-    while($row = mysqli_fetch_assoc($result)) 
-    {
-        echo $row['id'],' ', $row['file_path'],' ', $row['file_names'],' ', $row['file_size']. "<br />";
-    }
-    mysqli_close($link);*/
+    echo '<h2>Галлерея фотографий сортируется по количеству просмотрв</h2>';
+    $link = mysqli_connect('127.0.0.1', 'root', 'root', 'php_db', 3360);
+    $image_id = $_GET['id'];
+    if ($image_id != null) {
+        echo '<a href="/">На главную</a><br>';
+        $image_result = mysqli_query($link, "SELECT * FROM images WHERE id = $image_id;");
+        while ($row = mysqli_fetch_assoc($image_result)) 
+        {
+            $view_plus_one = (int)$row['viewed'] + 1;
+            mysqli_query($link, "UPDATE `php_db`.`images` SET `viewed` = '$view_plus_one' WHERE `id` = '$image_id';");
+            echo 'Количество просмотров этой фотографии: '.$view_plus_one.'<br>';
+            echo '<img src="'.$row["file_path"].$row["file_names"].'">';
+        }
+    } else {
+        $result = mysqli_query($link, "SELECT * FROM images ORDER BY viewed DESC;");
+        while($row = mysqli_fetch_assoc($result)) 
+        {
+            echo '<a href="/?id='.$row['id'].'"><img width="350px" src="'.$row['file_path'].$row['file_names'].'"></a>';
+            echo 'Просмотров: '.$row['viewed'].'<br>';
+        }
+    };
+    mysqli_close($link);
 ?>
-    <h2>Задание 1 - Галлерея на HTML</h2>
-    <a href="./img/wolf.jpg" target="_blank"><img width="350px" src="./img/wolf.jpg" alt="wolf"></a>
-    <a href="./img/bear.jpg" target="_blank"><img width="350px" src="./img/bear.jpg" alt="bear"></a>
-    <a href="./img/fox.jpg" target="_blank"><img width="350px" src="./img/fox.jpg" alt="fox"></a>
+    
 </body>
 </html>
