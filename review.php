@@ -23,14 +23,16 @@
             $review = mysqli_real_escape_string($mysql, htmlspecialchars(strip_tags($_POST['review'])));
             $review = trim($review);
             $query = 'INSERT INTO reviews (`review`) VALUES ("'.$review.'"); ';
-            mysqli_query($mysql, $query);
+            if ($review != NULL) {
+                mysqli_query($mysql, $query);
+            }
             // вывод отзывов
             $selectreviews = mysqli_query($mysql, "SELECT * FROM reviews WHERE 1");
             while ($row = mysqli_fetch_assoc($selectreviews)) {
                 echo '<h4>Отзыв '.$row['id'].'</h4>';
                 echo '<p>'.$row['review'].'</p><hr>';
             }
-       
+            mysqli_close($mysql);
         
 /*
             if ($image_id != null) {
