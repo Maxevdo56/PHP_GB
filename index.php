@@ -79,27 +79,7 @@
         }    
     ?>
     <p>Ответ: <?php echo $response_button?></p>
-    <h2>Задание 3. Функционал отзывов</h2>
-    <form method="POST">
-        <textarea name="review" cols="70" rows="5" placeholder="Введите ваш отзыв"></textarea>
-        <br>
-        <input type="submit">
-    </form>
-    <?php
-        if (count($_POST)) {
-            $mysql = mysqli_connect('localhost', 'root', 'root', 'php_db', 3360);
-            if (!$mysql) {
-                die('Не могу соединиться с БД');
-            }
-            $review = mysqli_real_escape_string($mysql, htmlspecialchars(strip_tags($_POST['review'])));
-            $review = trim($review);
-            var_dump($review);
-
-            $query = 'INSERT INTO reviews (`review`) VALUES ("'.$review.'"); ';
-            var_dump($query);
-            mysqli_query($mysql, $query);
-        }
-    ?>
+    
 </body>
 
 </html>
