@@ -14,29 +14,49 @@
         <input type="submit">
         <br><br>
     </form>
-    <?php
-        if (count($_POST)) {
+    <h3 style="color: blue">Отзывы:</h3>
+    <?php        
             $mysql = mysqli_connect('localhost', 'root', 'root', 'php_db', 3360);
             if (!$mysql) {
                 die('Не могу соединиться с БД');
             }
             $review = mysqli_real_escape_string($mysql, htmlspecialchars(strip_tags($_POST['review'])));
             $review = trim($review);
-            var_dump($review);
-
             $query = 'INSERT INTO reviews (`review`) VALUES ("'.$review.'"); ';
-            var_dump($query);
             mysqli_query($mysql, $query);
-        }
+            // вывод отзывов
+            $selectreviews = mysqli_query($mysql, "SELECT * FROM reviews WHERE 1");
+            while ($row = mysqli_fetch_assoc($selectreviews)) {
+                echo '<h4>Отзыв '.$row['id'].'</h4>';
+                echo '<p>'.$row['review'].'</p><hr>';
+            }
+       
+        
+/*
+            if ($image_id != null) {
+                echo '<a href="/">На главную</a><br>';
+                $image_result = mysqli_query($link, "SELECT * FROM images WHERE id = $image_id;");
+                while ($row = mysqli_fetch_assoc($image_result)) 
+                {
+                    $view_plus_one = (int)$row['viewed'] + 1;
+                    mysqli_query($link, "UPDATE `php_db`.`images` SET `viewed` = '$view_plus_one' WHERE `id` = '$image_id';");
+                    echo 'Количество просмотров этой фотографии: '.$view_plus_one.'<br>';
+                    echo '<img src="'.$row["file_path"].$row["file_names"].'">';
+                }
+            } else {
+                $result = mysqli_query($link, "SELECT * FROM images ORDER BY viewed DESC;");
+                while($row = mysqli_fetch_assoc($result)) 
+                {
+                    echo '<a href="/?id='.$row['id'].'"><img width="350px" src="'.$row['file_path'].$row['file_names'].'"></a>';
+                    echo 'Просмотров: '.$row['viewed'].'<br>';
+                }
+            };
+            mysqli_close($link);
+
+*/
+           
     ?>
-    <h3 color="blue">Отзывы:</h3>
-        
-        <h4>Отзыв 1</h4>
-        <p>Здесь будет отзыв из БД</p>
-        <hr>
-        
-        <h4>Отзыв 2</h4>
-        <p>Здесь будет отзыв из БД</p>
+
 
 </body>
 </html>
