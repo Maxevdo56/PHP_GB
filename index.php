@@ -35,7 +35,7 @@
                 $response = $firstnum.' * '.$secondnum.' = '.($firstnum * $secondnum);
                 Break;
             case 'divide':
-                if ($secondnum == 0) {
+                if ($secondnum === 0) {
                     $response = '<b>ОШИБКА!</b> Делить на 0 нельзя';
                     Break;
                 } else {
@@ -73,7 +73,7 @@
                     $response_button = '<b>ОШИБКА!</b> Делить на 0 нельзя';
                     Break;
                 } else {
-                    $response_button = $firstnum_b.' / '.$secondnum_b.' = '.($firstnum_b / $secondnum_b);
+                    $response_button = $firstnum_b.' : '.$secondnum_b.' = '.($firstnum_b / $secondnum_b);
                     Break;
                 }
         }    
