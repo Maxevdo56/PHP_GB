@@ -24,23 +24,29 @@
             $secondnum = $_GET["second_value"];
             switch ($_GET['operation']) {
                 case 'plus': 
+                    $oper = 'плюс'; 
                     $result = $_GET['first_value'] + $_GET['second_value']; 
-                    $oper = 'плюс'; Break;
+                    Break;
                 case 'minus': 
+                    $oper = 'минус'; 
                     $result = $_GET["first_value"] - $_GET["second_value"]; 
-                    $oper = 'минус'; Break;
+                    Break;
                 case 'multipl': 
+                    $oper = 'умножить на'; 
                     $result = $_GET["first_value"] * $_GET["second_value"]; 
-                    $oper = 'умножить на'; Break;
+                    Break;
                 case 'divide': 
-                    $result = $_GET["first_value"] / $_GET["second_value"]; 
-                    $oper = 'разделить на'; Break;
-            }
-            
+                    $oper = 'разделить на'; 
+                    if ($secondnum == 0) {
+                        $result = 'делить на 0 нельзя';
+                        Break;
+                    } else {
+                        $result = $_GET["first_value"] / $_GET["second_value"]; 
+                        Break;
+                    }
+            }    
         ?>
-        <input type="submit">
-
-        <form action="#" method="post">   
+        <input type="submit">   
         <p>Ответ: <?php echo $_GET["first_value"].' '.$oper.' '.$_GET["second_value"].' = '.$result;?></p>
 </body>
 
