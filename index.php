@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <h2>Калькулятор</h2>
+    <h2>Задание 1. Калькулятор (через тэг select)</h2>
     <form method="GET">
         <input type="text" required name="first_value" pattern="^[ 0-9]+$" placeholder="Введите первое число">
         <select name="operation" id="act">
@@ -19,35 +19,66 @@
             <option value="divide">разделить</option>
         </select>
         <input type="text" required name="second_value" pattern="^[0-9]+$" placeholder="Введите второе число">
-        <?php
-            $firstnum = $_GET["first_value"];
-            $secondnum = $_GET["second_value"];
-            switch ($_GET['operation']) {
-                case 'plus': 
-                    $oper = 'плюс'; 
-                    $result = $_GET['first_value'] + $_GET['second_value']; 
+        <input type="submit">
+    </form>
+    <?php
+        $firstnum = $_GET["first_value"];
+        $secondnum = $_GET["second_value"];
+        switch ($_GET['operation']) {
+            case 'plus': 
+                $response = $firstnum.' + '.$secondnum.' = '.($firstnum + $secondnum);
+                Break;
+            case 'minus': 
+                $response = $firstnum.' - '.$secondnum.' = '.($firstnum - $secondnum); 
+                Break;
+            case 'multipl': 
+                $response = $firstnum.' * '.$secondnum.' = '.($firstnum * $secondnum);
+                Break;
+            case 'divide':
+                if ($secondnum == 0) {
+                    $response = '<b>ОШИБКА!</b> Делить на 0 нельзя';
                     Break;
-                case 'minus': 
-                    $oper = 'минус'; 
-                    $result = $_GET["first_value"] - $_GET["second_value"]; 
+                } else {
+                    $response = $firstnum.' : '.$secondnum.' = '.($firstnum / $secondnum); 
                     Break;
-                case 'multipl': 
-                    $oper = 'умножить на'; 
-                    $result = $_GET["first_value"] * $_GET["second_value"]; 
+                }
+        }    
+    ?>
+    <p>Ответ: <?php echo $response?></p>
+
+    <h2>Задание 2. Калькулятор (через кнопки)</h2>
+    <form method="GET">
+        <input type="text" required name="first_button_value" pattern="^[ 0-9]+$" placeholder="Введите первое число">
+        <input type="text" required name="second_button_value" pattern="^[0-9]+$" placeholder="Введите второе число">
+        <input type="submit" name="oper_button" value="plus">
+        <input type="submit" name="oper_button" value="minus">
+        <input type="submit" name="oper_button" value="multipl">
+        <input type="submit" name="oper_button" value="divide">
+    </form>
+    <?php
+        $firstnum_b = $_GET["first_button_value"];
+        $secondnum_b = $_GET["second_button_value"];
+        switch ($_GET['oper_button']) {
+            case 'plus': 
+                $response_button = $firstnum_b.' + '.$secondnum_b.' = '.($firstnum_b + $secondnum_b);
+                Break;
+            case 'minus': 
+                $response_button = $firstnum_b.' - '.$secondnum_b.' = '.($firstnum_b - $secondnum_b);
+                Break;
+            case 'multipl': 
+                $response_button = $firstnum_b.' * '.$secondnum_b.' = '.($firstnum_b * $secondnum_b);
+                Break;
+            case 'divide':
+                if ($secondnum_b == 0) {
+                    $response_button = '<b>ОШИБКА!</b> Делить на 0 нельзя';
                     Break;
-                case 'divide': 
-                    $oper = 'разделить на'; 
-                    if ($secondnum == 0) {
-                        $result = 'делить на 0 нельзя';
-                        Break;
-                    } else {
-                        $result = $_GET["first_value"] / $_GET["second_value"]; 
-                        Break;
-                    }
-            }    
-        ?>
-        <input type="submit">   
-        <p>Ответ: <?php echo $_GET["first_value"].' '.$oper.' '.$_GET["second_value"].' = '.$result;?></p>
+                } else {
+                    $response_button = $firstnum_b.' / '.$secondnum_b.' = '.($firstnum_b / $secondnum_b);
+                    Break;
+                }
+        }    
+    ?>
+    <p>Ответ: <?php echo $response_button?></p>
 </body>
 
 </html>
