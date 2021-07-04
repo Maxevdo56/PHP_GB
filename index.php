@@ -24,11 +24,15 @@
                 echo '<p>Цена за 1 кг: '.$row['price'].' руб.</p>';
                 echo '<a href="product.php?productID='.$row['id'].'">Перейти к товару</a>';
                 echo '<img class="img_mini" src="'.$row['photo_filepath'].'">';
-                echo '</div>';
+            echo '</div>';
             }
+            echo '</div>';
         mysqli_close($mysql);
     ?>
-<a href="cart.php">Перейти в корзину</a>
+<br>
+<a class="none" href="cart.php">Перейти в корзину</a>
+<br>
+<a class="none" href="auth.php">Авторизация</a>
     
 </body>
 

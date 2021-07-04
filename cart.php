@@ -33,9 +33,18 @@
             $good_total = $price * $quantity;
             echo '<tr >';
             echo '<td class="tablerow">'.$row['name'].' <img width="100px" src="'.$row['photo_filepath'].'"></td>';
-            echo '<td class="tablerow"><a href="product.php?productID='.$row['id'].'">Перейти к товару</a></td>';
+            echo '<td class="tablerow">
+            <form name="addtocart" action="addtocart.php" method="POST">
+                <input type="hidden" name="product_ID" value="'.$row['id'].'">
+                <input type="submit" value="+1">
+            </form>
+            <form name="removefromcart" action="removefromcart.php" method="POST">
+                <input type="hidden" name="product_ID" value="'.$row['id'].'">
+                <input type="submit" value="-1">
+            </form>
+            <a href="product.php?productID='.$row['id'].'">Перейти к товару</a></td>';
             echo '<td class="tablerow">'.$price.' руб.</td>';
-            echo '<td class="tablerow">'.$quantity.'</td>';
+            echo '<td class="tablerow">'.$quantity.' кг.</td>';
             echo '<td class="tablerow">'.$good_total.' руб.</td>';
             $total += $good_total;
             echo '</tr>';
