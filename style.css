@@ -17,3 +17,12 @@
 .img_mini {
     max-width: 100%;
 }
+.tablerow {
+    height: 70px;
+    min-width: 100px;
+    border: 1px solid black;
+    padding: 4px;
+    border-collapse: collapse;
+    text-align: center;
+
+}

@@ -24,17 +24,19 @@
                     echo '<p>Цена за 1 кг: '.$row['price'].' руб.</p>';
                     echo '<img class="img_mini" src="'.$row['photo_filepath'].'">';
                 echo '</div>';
-                echo '<a href="catalog.php">Вернуться в каталог</a><br>';
+                echo '<a href="index.php">Вернуться в каталог</a><br>';
+                echo '<a href="cart.php">Перейти в корзину</a><br>';
             }
         mysqli_close($mysql);
     ?>
     <br>
-    
-    
-<form name="addtocart" action="addtocart.php" method="post">
+<form name="addtocart" action="addtocart.php" method="POST">
     <input type="hidden" name="product_ID" value="<?php echo $productID;?>">
     <input type="submit" value="Добавить в корзину">
 </form>
-<?php var_dump($_POST); ?>
+<form name="removefromcart" action="removefromcart.php" method="POST">
+    <input type="hidden" name="product_ID" value="<?php echo $productID;?>">
+    <input type="submit" value="Удалить из корзины">
+</form>
 </body>
 </html>
