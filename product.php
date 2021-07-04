@@ -13,10 +13,8 @@
         if (!$mysql) {
             die('Не могу соединиться с БД');
         }
-        $product = $_GET['product'];
-        $cardquery = mysqli_query($mysql, "SELECT * FROM products WHERE id = '$product'");
-
-        echo '<div class="wrap">';
+        $productID = $_GET['productID'];
+        $cardquery = mysqli_query($mysql, "SELECT * FROM products WHERE id = '$productID'");
             while ($row = mysqli_fetch_assoc($cardquery)) {
                 echo '<div class="productcard">';
                     echo '<h3>'.$row['name'].'</h3>';
@@ -30,5 +28,15 @@
             }
         mysqli_close($mysql);
     ?>
+    <br>
+<form name="addtocart" action="addtocart.php" method="post">
+    <input type="hidden" name="product_ID" value="<?php echo $productID;?>">
+    <input type="submit" value="Добавить в корзину">
+</form>
+<?php 
+var_dump($_POST['product_ID']);
+var_dump($_POST); // вывод массива $_POST даёт NULL, т.е. массив пустой
+?>
+
 </body>
 </html>

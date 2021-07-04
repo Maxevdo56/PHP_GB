@@ -10,6 +10,7 @@
 </head>
 
 <body>
+<h2>Каталог товаров</h2>
     <?php
         $mysql = mysqli_connect('localhost', 'root', 'root', 'php_db', 3360);
         if (!$mysql) {
@@ -21,7 +22,7 @@
                 echo '<div class="productcard">';
                     echo '<h3>'.$row['name'].'</h3>';
                     echo '<p>Цена за 1 кг: '.$row['price'].' руб.</p>';
-                    echo '<a href="product.php?product='.$row['id'].'">Перейти к товару</a>';
+                    echo '<a href="product.php?productID='.$row['id'].'">Перейти к товару</a>';
                     echo '<img class="img_mini" src="'.$row['photo_filepath'].'">';
                 echo '</div>';
             }

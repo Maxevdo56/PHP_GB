@@ -79,7 +79,8 @@
         }    
     ?>
     <p>Ответ: <?php echo $response_button?></p>
-    
+    <br><br>
+    <a href="/catalog.php">Перейти в каталог товаров</a>
 </body>
 
 </html>
