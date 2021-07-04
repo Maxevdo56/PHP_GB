@@ -30,7 +30,7 @@
     ?>
     <br>
 <form name="addtocart" action="addtocart.php" method="post">
-    <input type="hidden" name="product_ID" value="<?php echo $productID;?>">
+    <input type="" name="product_ID" value="<?php echo $productID;?>">
     <input type="submit" value="Добавить в корзину">
 </form>
 <?php 
