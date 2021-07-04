@@ -29,14 +29,12 @@
         mysqli_close($mysql);
     ?>
     <br>
+    
+    
 <form name="addtocart" action="addtocart.php" method="post">
-    <input type="" name="product_ID" value="<?php echo $productID;?>">
+    <input type="hidden" name="product_ID" value="<?php echo $productID;?>">
     <input type="submit" value="Добавить в корзину">
 </form>
-<?php 
-var_dump($_POST['product_ID']);
-var_dump($_POST); // вывод массива $_POST даёт NULL, т.е. массив пустой
-?>
-
+<?php var_dump($_POST); ?>
 </body>
 </html>

@@ -20,10 +20,10 @@
         echo '<div class="wrap">';
             while ($row = mysqli_fetch_assoc($productsquery)) {
                 echo '<div class="productcard">';
-                    echo '<h3>'.$row['name'].'</h3>';
-                    echo '<p>Цена за 1 кг: '.$row['price'].' руб.</p>';
-                    echo '<a href="product.php?productID='.$row['id'].'">Перейти к товару</a>';
-                    echo '<img class="img_mini" src="'.$row['photo_filepath'].'">';
+                echo '<h3>'.$row['name'].'</h3>';
+                echo '<p>Цена за 1 кг: '.$row['price'].' руб.</p>';
+                echo '<a href="product.php?productID='.$row['id'].'">Перейти к товару</a>';
+                echo '<img class="img_mini" src="'.$row['photo_filepath'].'">';
                 echo '</div>';
             }
         mysqli_close($mysql);
