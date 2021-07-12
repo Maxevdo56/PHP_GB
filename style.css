@@ -1,0 +1,28 @@
+.productcard {
+    background-color: darkgrey;
+    text-decoration: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    min-width: 150px;
+    max-width: 300px;
+    outline: 5px solid #fff;
+    margin: 5px;
+    padding: 7px;
+}
+.wrap {
+    display: flex;
+    justify-content: flex-start;
+
+}
+.img_mini {
+    max-width: 100%;
+}
+.tablerow {
+    height: 70px;
+    min-width: 100px;
+    border: 1px solid black;
+    padding: 4px;
+    border-collapse: collapse;
+    text-align: center;
+
+}
