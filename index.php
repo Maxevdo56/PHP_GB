@@ -33,6 +33,11 @@
 <a class="none" href="cart.php">Перейти в корзину</a>
 <br>
 <a class="none" href="auth.php">Авторизация</a>
+<br>
+<form action="./editgoods.php">
+    <input type="submit" value="Управление товарами">
+</form>
+
     
 </body>
 
