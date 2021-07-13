@@ -16,7 +16,7 @@
     $productsquery = mysqli_query($mysql, "SELECT * FROM products WHERE 1");
     echo '<h3>Управление товарами в базе данных</h3>';
     echo '<table class="tablerow">';
-            echo '<tr >';
+            echo '<tr bgcolor="#faebb">';
                 echo '<td class="tablerow">Управление</td>';
                 echo '<td class="tablerow">Наименование</td>';
                 echo '<td class="tablerow">Страна товара</td>';
@@ -25,22 +25,24 @@
                 echo '<td class="tablerow">Описание</td>';
                 echo '<td class="tablerow">Фотография</td>';
             echo '</tr>';
-            echo '<tr >';
+            echo '<tr  bgcolor="9ada76">';
                 echo '<td class="tablerow">
-                <form name="addtodatabase" action="./addtodb.php" method="GET">
-                    <input type="submit" value="Добавить в базу">
-                </form>
-                </td>';
-                echo '<td class="tablerow"><input type="text" name="newname" placeholder="Введите название"></td>';
-                echo '<td class="tablerow"><input type="text" name="newcountry" placeholder="Введите страну"></td>';
-                echo '<td class="tablerow"><input type="text" name="newnutricious" placeholder="Сколько ккал в 1 кг"></td>';
-                echo '<td class="tablerow"><input type="text" name="newprice" placeholder="Введите цену за 1 кг"></td>';
-                echo '<td class="tablerow"><input type="text" name="newdesc" placeholder="Введите описание"></td>';
+                <form enctype="multipart/form-data" name="addtodatabase" action="./addtodb.php" method="POST">
+                    <input type="submit" value="Добавить в базу"></td>';
+                echo '<td class="tablerow"><input type="text" style="width:130px" required name="newname" placeholder="Введите название"></td>';
+                echo '<td class="tablerow"><input type="text" style="width:130px" required name="newcountry" placeholder="Введите страну"></td>';
+                echo '<td class="tablerow"><input type="text" style="width:130px" required pattern="^[ 0-9]+$" name="newnutricious" placeholder="Сколько ккал в 1 кг"></td>';
+                echo '<td class="tablerow"><input type="text" style="width:130px" required name="newprice" placeholder="Введите цену за 1 кг"></td>';
+                echo '<td class="tablerow"><textarea cols="25" rows="4" required name="newdesc" placeholder="Введите описание"></textarea></td>';
+                echo '<td class="tablerow"><input type="file" name="newimg"></td>';
+                
             echo '</tr>';
+            echo '</form>';
+            
         while ($row = mysqli_fetch_assoc($productsquery)) {
             echo '<tr >';
             echo '<td class="tablerow">
-            <form name="removefromdatabase" action="" method="POST">
+            <form name="removefromdatabase" action="./removefromdb.php" method="GET">
                 <input type="hidden" name="product_ID" value="'.$row['id'].'">
                 <input type="submit" value="Удалить из базы">
             </form>

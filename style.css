@@ -24,5 +24,11 @@
     padding: 4px;
     border-collapse: collapse;
     text-align: center;
-
+}
+.input_good {
+    width: 130px;
+}
+.input_good_desc {
+    width: 130px;
+    height: 60px;
 }
