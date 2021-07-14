@@ -11,6 +11,10 @@
 
 <body>
 <h2>Каталог товаров</h2>
+<form action="./editgoods.php">
+    <input type="submit" value="Управление товарами">
+</form>
+<br>
     <?php
         $mysql = mysqli_connect('localhost', 'root', 'root', 'php_db', 3360);
         if (!$mysql) {
@@ -30,15 +34,7 @@
         mysqli_close($mysql);
     ?>
 <br>
-<a class="none" href="cart.php">Перейти в корзину</a>
-<br>
-<a class="none" href="auth.php">Авторизация</a>
-<br>
-<form action="./editgoods.php">
-    <input type="submit" value="Управление товарами">
-</form>
-
-    
+<a class="none" href="cart.php">Перейти в корзину</a>   
 </body>
 
 </html>
